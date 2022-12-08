@@ -2,36 +2,19 @@ package model;
 
 public class Pizza extends Food{
 
-    private String toppingOne;
-    private String toppingTwo;
+    private Ingredients ingredient1;
+    private Ingredients ingredient2;
 
-    public Pizza(int productCost, String productName, Ingredients ingredients, String toppingOne, String toppingTwo) {
-        super(productCost, productName, ingredients);
-        this.toppingOne = toppingOne;
-        this.toppingTwo = toppingTwo;
-    }
-
-    //@return
-    public String getToppingOne() {
-        return toppingOne;
+    public Pizza(int productCost, String productName, FoodType foodType, Ingredients ingredient1, Ingredients ingredient2) {
+        super(productCost, productName, foodType);
+        this.ingredient1 = ingredient1;
+        this.ingredient2 = ingredient2;
     }
 
-    public void setToppingOne(String toppingOne) {
-        this.toppingOne = toppingOne;
-    }
-    
-    //@return
-    public String getToppingTwo() {
-        return toppingTwo;
-    }
-
-    public void setToppingTwo(String toppingTwo) {
-        this.toppingTwo = toppingTwo;
-    }
 
     @Override
     public String toString() {
-        return super.toString() + ", Toppings: " + toppingOne + ", " + toppingTwo;
+        return super.toString() + ", Toppings: " + ingredient1 + ", " + ingredient2;
     }
 
 }

@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import model.Drink;
 import model.DrinkType;
 import model.Food;
+import model.FoodType;
 import model.IMenu;
 import model.Ingredients;
 import model.Menu;
@@ -49,10 +50,11 @@ public class Controller {
         currentOrderArray = new String[15];
         ordersList = new Order[3];
     
-        menu.addPizza(20, "Margarita", Ingredients.Cheese, "chili", "Ägg");
-        menu.addPizza(40, "Peperoni", Ingredients.Pepperoni, "Hot souce", "Kött");
-        menu.addPizza(60, "Mozarella", Ingredients.Mozzarella, "Dipp souce", "Gurka");
-        menu.addPizza(60, "Kebab", Ingredients.Ham, "Nötkött", "Kyckling");
+        menu.addPizza(20, "Margarita", FoodType.Pizza, Ingredients.Cheese, Ingredients.Ham);
+        menu.addPizza(40, "Peperoni", FoodType.Pizza, Ingredients.Pepperoni, Ingredients.Pepperoni);
+        menu.addPizza(60, "Mozarella", FoodType.Pizza, Ingredients.Mozzarella, Ingredients.Ham);
+        menu.addPizza(60, "Mozarella", FoodType.Pizza, Ingredients.Pepperoni, Ingredients.Ham);
+        menu.addPizza(60, "Hawai", FoodType.Pizza, Ingredients.Pineapple, Ingredients.Cheese);
 
         menu.addDrink(15, "Cola", DrinkType.Nonalcoholic);
         menu.addDrink(15, "Fanta", DrinkType.Nonalcoholic);
@@ -242,9 +244,8 @@ public class Controller {
                 ordersCost[i] = costCurrentOrder;
 
                 //Adds current order to the ordersName array
-                ordersName[i] = "Order " + (i+1) + ", Cost: " + ordersCost[i];
+                ordersName[i] = "Order " + (i+1) + ", Costs: " + ordersCost[i];
                 
-            
                 break;
             }
         }

@@ -30,10 +30,10 @@ public class Menu implements IMenu{
         return productCost;
     }
    
-    public void addPizza(int costOfPizza, String pizzaName, Ingredients ingredients, String toppingOne, String toppingTwo){
+    public void addPizza(int costOfPizza, String pizzaName, FoodType foodType, Ingredients ingredient1, Ingredients ingredient2){
         for (int i = 0; i < foods.length; i++) {
             if(foods[i] == null){
-                foods[i] = new Pizza(costOfPizza, pizzaName, ingredients, toppingOne, toppingTwo);
+                foods[i] = new Pizza(costOfPizza, pizzaName, foodType, ingredient1, ingredient2);
                 break;
             }
         }
