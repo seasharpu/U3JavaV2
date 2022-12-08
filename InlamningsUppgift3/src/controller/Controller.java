@@ -18,17 +18,19 @@ public class Controller {
     
     private ButtonType currentLeftMenu = ButtonType.NoChoice; // for test purposes - delete if not used in final solution
 
-    private String [] ordersName;
-    private Double [] ordersCost; 
-    private Order[] ordersList;
-    private boolean pizzaOrdered = false;
-
-    private String [] currentOrderArray; 
-    private double costCurrentOrder = 0; 
-    private int nbrOfOrders = 0; 
-
     private Menu menu = new Menu();
     private CustomPizzaFrame newPizzaType;
+
+    private String [] currentOrderArray; 
+    private int nbrOfItemsInList = 0; 
+    private double costCurrentOrder = 0; 
+
+    private Order[] ordersList;
+    int nbrOfOrdersInOrdersList;
+
+    private boolean pizzaOrdered = false;
+
+
 
   
     public Controller() {
@@ -43,8 +45,6 @@ public class Controller {
     private void loadStringTestValues() {
 
         currentOrderArray = new String[10];
-        ordersName = new String[3];
-        ordersCost = new Double[3];
         ordersList = new Order[3];
     
         menu.addPizza(20, "Margarita", FoodType.Pizza, Ingredients.Cheese, Ingredients.Ham);
@@ -86,7 +86,7 @@ public class Controller {
 
             case Order:
                 //Cheks the number of orders chosen by user
-                if(nbrOfOrders != 0){
+                if(nbrOfItemsInList != 0){
                     if(pizzaOrdered == true){
                         placeOrder();
                     }else{
@@ -113,7 +113,7 @@ public class Controller {
         if (selectionIndex != -1){ // if something is selected in the left menu list
             switch (currentLeftMenu) { //This might need to change depending on architecture
                 case Food:
-                    currentOrderArray[nbrOfOrders] = menu.getFoods()[selectionIndex]; //for test purposes - needs to be replaced with solution of finding chosen menu item matching architecture for model
+                    currentOrderArray[nbrOfItemsInList] = menu.getFoods()[selectionIndex]; //for test purposes - needs to be replaced with solution of finding chosen menu item matching architecture for model
                     costCurrentOrder = costCurrentOrder + menu.getFoodCost(selectionIndex);
                     pizzaOrdered = true;
                     break;
@@ -124,25 +124,25 @@ public class Controller {
                         int usersAge = Integer.parseInt(ageOfUser);
 
                         if(usersAge >= 18){
-                            currentOrderArray[nbrOfOrders] = menu.getDrinks()[selectionIndex];
+                            currentOrderArray[nbrOfItemsInList] = menu.getDrinks()[selectionIndex];
                             costCurrentOrder = costCurrentOrder + menu.getDrinkCost(selectionIndex); 
                         }else{
                             String message = "You have to be older than 18!";
                             JOptionPane.showMessageDialog(newPizzaType, message);
                         }
                     }else{
-                        currentOrderArray[nbrOfOrders] = menu.getDrinks()[selectionIndex];
+                        currentOrderArray[nbrOfItemsInList] = menu.getDrinks()[selectionIndex];
                         costCurrentOrder = costCurrentOrder + menu.getDrinkCost(selectionIndex); 
                     }
                     break;
             }
             
             //This method increase the length of the currentOrderArray while it is almost full
-            if(nbrOfOrders == (currentOrderArray.length-1)){
+            if(nbrOfItemsInList == (currentOrderArray.length-1)){
                 increaseCurrentOrderArrayLength();
             }
             
-            nbrOfOrders++;
+            nbrOfItemsInList++;
             view.populateRightPanel(currentOrderArray);
             view.setTextCostLabelRightPanel("Total cost of order: " + String.valueOf(costCurrentOrder));
         }
@@ -158,7 +158,7 @@ public class Controller {
             view.populateRightPanel(ordersList[selectionIndex].getOrderHistory()); //update right panel with order details - this takes a shortcut in updating the entire information in the panel not just adds to the en
             
             //Sets the cost of the chosen order
-            view.setTextCostLabelRightPanel("Total cost of order: " + ordersCost[selectionIndex]); //set the text to show cost of current order
+            view.setTextCostLabelRightPanel("Total cost of order: " + ordersList[selectionIndex].getOrderCost()); //set the text to show cost of current order
 
         }
     }
@@ -192,6 +192,14 @@ public class Controller {
         currentLeftMenu = ButtonType.OrderHistory;
         view.clearRightPanel();
 
+        String[] ordersName = new String[ordersList.length];
+
+        for (int i = 0; i < ordersList.length; i++) {
+            if(ordersList[i] != null){
+                ordersName[i] = ordersList[i].getOrderName();
+            }
+        }
+
         view.populateLeftPanel(ordersName);
         view.enableAllButtons();
         view.disableAddMenuButton();
@@ -208,10 +216,19 @@ public class Controller {
 
     //Adds order to orderList array, clears the currentOrderArray and resets the variables
     public void placeOrder() {
-        System.out.println("Pressed Order to create a new order"); //for test purposes - remove when not needed more
         
+        //Counts the amount orders in orderslist to generate a name for newOrder
+        for (int i = 0; i < ordersList.length; i++) {
+            if(ordersList[i] == null){
+                nbrOfOrdersInOrdersList = i;
+                break;
+            }
+        }
+        
+        String newOrderName = "Order " + (nbrOfOrdersInOrdersList + 1); 
+
         //Creates new Order object
-        Order newOrder = new Order(nbrOfOrders);
+        Order newOrder = new Order(nbrOfItemsInList, costCurrentOrder, newOrderName);
 
         //Adds all ordered items to Order history array in Order class
         for (String currentOrder : currentOrderArray) {
@@ -235,29 +252,10 @@ public class Controller {
             }
         }
 
-        //Updates the ordersName and ordersCost
-        for (int i = 0; i < ordersName.length; i++) {
-            if(ordersName[i] == null){
-
-                 //When ordersName and ordersCost is almost full
-                 if(i == (ordersName.length-1)){
-                    increaseArraysNameAndCost();
-                }
-
-                //Adds current orders cost to the orderCost array
-                ordersCost[i] = costCurrentOrder;
-
-                //Adds current order to the ordersName array
-                ordersName[i] = "Order " + (i+1) + ", Costs: " + ordersCost[i];
-                
-                break;
-            }
-        }
-
         //Resets the order array
         currentOrderArray = new String[10];  // for test purposes - remove when not needed more
+        nbrOfItemsInList = 0;
         costCurrentOrder = 0;
-        nbrOfOrders = 0;
         pizzaOrdered = false;
         
         view.clearRightPanel(); //Removes information from right panel in GUI
@@ -280,6 +278,7 @@ public class Controller {
         ordersList = tempOrdersList;
     }
 
+    /* 
     //Increases the length of name and cost arrays
     public void increaseArraysNameAndCost(){
         String[] tempOrdersName = new String[ordersName.length + 10];
@@ -295,6 +294,7 @@ public class Controller {
         ordersName = tempOrdersName;
         ordersCost = tempOrdersCost;
     }
+*/
 
     //This method increase the length of the currentOrderArray while it is almost full
     public void increaseCurrentOrderArrayLength(){
