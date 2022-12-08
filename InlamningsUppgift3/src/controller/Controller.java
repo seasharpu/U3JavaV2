@@ -42,9 +42,9 @@ public class Controller {
     //Prepares the arrays and creates pizzas and drinks 
     private void loadStringTestValues() {
 
+        currentOrderArray = new String[10];
         ordersName = new String[3];
         ordersCost = new Double[3];
-        currentOrderArray = new String[15];
         ordersList = new Order[3];
     
         menu.addPizza(20, "Margarita", FoodType.Pizza, Ingredients.Cheese, Ingredients.Ham);
@@ -303,6 +303,7 @@ public class Controller {
         for (int i = 0; i<ordersList.length; i++){
             if(tempCurrentOrderArray[i] == null){
                 tempCurrentOrderArray[i] = currentOrderArray[i];
+                break;
             }
         }
 
