@@ -46,7 +46,7 @@ public class Controller {
 
         ordersName = new String[3];
         ordersCost = new Double[3];
-        currentOrderArray = new String[10];
+        currentOrderArray = new String[15];
         ordersList = new Order[3];
     
         menu.addPizza(20, "Margarita", Ingredients.Cheese, "chili", "Ägg");
@@ -130,7 +130,12 @@ public class Controller {
                     }
                     break;
             }
-
+            /* 
+            //This method increase the length of the currentOrderArray while it is almost full
+            if(nbrOfOrders == (currentOrderArray.length-1)){
+                increaseCurrentOrderArrayLength();
+            }
+            */
             nbrOfOrders++;
             view.populateRightPanel(currentOrderArray);
             view.setTextCostLabelRightPanel("Total cost of order: " + String.valueOf(costCurrentOrder));
@@ -233,11 +238,13 @@ public class Controller {
                     increaseArraysNameAndCost();
                 }
 
-                //Adds current order to the ordersName array
-                ordersName[i] = "Order " + (i+1);
-                
                 //Adds current orders cost to the orderCost array
                 ordersCost[i] = costCurrentOrder;
+
+                //Adds current order to the ordersName array
+                ordersName[i] = "Order " + (i+1) + ", Cost: " + ordersCost[i];
+                
+            
                 break;
             }
         }
@@ -281,5 +288,18 @@ public class Controller {
 
         ordersName = tempOrdersName;
         ordersCost = tempOrdersCost;
+    }
+
+    //This method increase the length of the currentOrderArray while it is almost full
+    public void increaseCurrentOrderArrayLength(){
+        String[] tempCurrentOrderArray = new String[currentOrderArray.length + 10];
+
+        for (int i = 0; i<ordersList.length; i++){
+            if(tempCurrentOrderArray[i] == null){
+                tempCurrentOrderArray[i] = currentOrderArray[i];
+            }
+        }
+
+        currentOrderArray = tempCurrentOrderArray;
     }
 }
