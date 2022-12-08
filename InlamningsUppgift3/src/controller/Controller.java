@@ -136,12 +136,12 @@ public class Controller {
                     }
                     break;
             }
-            /* 
+            
             //This method increase the length of the currentOrderArray while it is almost full
             if(nbrOfOrders == (currentOrderArray.length-1)){
                 increaseCurrentOrderArrayLength();
             }
-            */
+            
             nbrOfOrders++;
             view.populateRightPanel(currentOrderArray);
             view.setTextCostLabelRightPanel("Total cost of order: " + String.valueOf(costCurrentOrder));
@@ -211,7 +211,7 @@ public class Controller {
         System.out.println("Pressed Order to create a new order"); //for test purposes - remove when not needed more
         
         //Creates new Order object
-        Order newOrder = new Order();
+        Order newOrder = new Order(nbrOfOrders);
 
         //Adds all ordered items to Order history array in Order class
         for (String currentOrder : currentOrderArray) {

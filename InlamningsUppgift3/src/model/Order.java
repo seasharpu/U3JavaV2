@@ -1,9 +1,11 @@
 package model;
 
 public class Order {
-    private String[] orderHistory = new String[10];
+    private String[] orderHistory;
 
-    public Order() {}
+    public Order(int lengthOfOrderHistoryString) {
+        orderHistory = new String[lengthOfOrderHistoryString];
+    }
 
     //@return
     public String[] getOrderHistory() {
