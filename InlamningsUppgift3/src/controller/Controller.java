@@ -6,15 +6,11 @@ import view.MainFrame;
 
 import javax.swing.JOptionPane;
 
-import model.Drink;
 import model.DrinkType;
-import model.Food;
 import model.FoodType;
-import model.IMenu;
 import model.Ingredients;
 import model.Menu;
 import model.Order;
-import model.Pizza;
 import view.ButtonType;
 
 public class Controller {
@@ -25,6 +21,7 @@ public class Controller {
     private String [] ordersName;
     private Double [] ordersCost; 
     private Order[] ordersList;
+    private boolean pizzaOrdered = false;
 
     private String [] currentOrderArray; 
     private double costCurrentOrder = 0; 
@@ -35,7 +32,7 @@ public class Controller {
 
   
     public Controller() {
-        view = new MainFrame(1000, 500, this);
+        view = new MainFrame(1200, 500, this);
         loadStringTestValues(); //for test purposes - remove when not needed more
         view.enableAllButtons();
         view.disableAddMenuButton();
@@ -90,9 +87,15 @@ public class Controller {
             case Order:
                 //Cheks the number of orders chosen by user
                 if(nbrOfOrders != 0){
-                    placeOrder();
+                    if(pizzaOrdered == true){
+                        placeOrder();
+                    }else{
+                        String message = "You have to order minimum one pizza!";
+                        JOptionPane.showMessageDialog(newPizzaType, message);
+                    }
                 }else{
-                    System.out.println("Nothing added to the order list!");
+                    String message = "Nothing added to the order list!";
+                    JOptionPane.showMessageDialog(newPizzaType, message);
                 }
 
                 break;
@@ -112,6 +115,7 @@ public class Controller {
                 case Food:
                     currentOrderArray[nbrOfOrders] = menu.getFoods()[selectionIndex]; //for test purposes - needs to be replaced with solution of finding chosen menu item matching architecture for model
                     costCurrentOrder = costCurrentOrder + menu.getFoodCost(selectionIndex);
+                    pizzaOrdered = true;
                     break;
                 case Drinks:
                     //Checks the type of drink
@@ -254,6 +258,7 @@ public class Controller {
         currentOrderArray = new String[10];  // for test purposes - remove when not needed more
         costCurrentOrder = 0;
         nbrOfOrders = 0;
+        pizzaOrdered = false;
         
         view.clearRightPanel(); //Removes information from right panel in GUI
         view.setTextCostLabelRightPanel("TOTAL COST: 0");

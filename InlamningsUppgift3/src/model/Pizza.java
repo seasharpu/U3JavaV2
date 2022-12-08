@@ -13,8 +13,13 @@ public class Pizza extends Food{
 
 
     @Override
+    public String productOrigin() {
+        return "Sweden";
+    }
+
+    @Override
     public String toString() {
-        return super.toString() + ", Toppings: " + ingredient1 + ", " + ingredient2;
+        return super.toString() + ", Toppings: " + ingredient1 + ", " + ingredient2 + ", Origin: " + productOrigin();
     }
 
 }

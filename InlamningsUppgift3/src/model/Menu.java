@@ -101,14 +101,14 @@ public class Menu implements IMenu{
         return drinkStrings;
     }
 
+    @Override
+    public String productOrigin() {
+        return null;
+    }
+
     //@return
     public DrinkType getTypeOfDrink(int selectionIndex) {
         return drinks[selectionIndex].getDrinkType();
-    }
-
-    @Override
-    public String findProductItem(String itemIdentifier) {
-        return null;
     }
 
     //@return

@@ -18,9 +18,14 @@ public class Drink extends Menu{
         this.drinkType = drinkType;
     }
 
+    @Override
+    public String productOrigin() {
+        return "Germany";
+    }
+
     //@return
     @Override
     public String toString() {
-        return super.toString() + ", Type: " + drinkType;
+        return super.toString() + ", Type: " + drinkType + " Origin: " + productOrigin();
     }
 }

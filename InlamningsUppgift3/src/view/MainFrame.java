@@ -2,6 +2,8 @@ package view;
 
 import controller.Controller;
 
+import java.awt.Color;
+
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
@@ -13,11 +15,11 @@ public class MainFrame extends JFrame {
         this.controller = controller;
         this.setResizable(false);
         this.setSize(width, height);
+        this.setLocation(100,100);
         this.mainPanel = new MainPanel(width, height, this);
         this.setContentPane(mainPanel);
         this.setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
     /**
