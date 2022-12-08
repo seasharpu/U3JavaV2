@@ -300,10 +300,9 @@ public class Controller {
     public void increaseCurrentOrderArrayLength(){
         String[] tempCurrentOrderArray = new String[currentOrderArray.length + 10];
 
-        for (int i = 0; i<ordersList.length; i++){
+        for (int i = 0; i<currentOrderArray.length; i++){
             if(tempCurrentOrderArray[i] == null){
                 tempCurrentOrderArray[i] = currentOrderArray[i];
-                break;
             }
         }
 
