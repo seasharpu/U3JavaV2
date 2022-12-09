@@ -5,8 +5,8 @@ public class Order {
     private Double orderCost;
     private String orderName;
 
-    public Order(int lengthOfOrderHistoryString, double orderCost, String ordername) {
-        orderItems = new String[lengthOfOrderHistoryString];
+    public Order(int amountOfItemsInCurrentOrder, double orderCost, String ordername) {
+        orderItems = new String[amountOfItemsInCurrentOrder];
         this.orderCost = orderCost;
         this.orderName = ordername;
     }
@@ -26,10 +26,10 @@ public class Order {
         return orderName;
     }
 
-    public void addToArray(String order) {
+    public void addToArray(String item) {
         for (int i = 0; i<orderItems.length; i++){
             if(orderItems[i] == null){
-                orderItems[i] = order;
+                orderItems[i] = item;
                 break;
             }
         }

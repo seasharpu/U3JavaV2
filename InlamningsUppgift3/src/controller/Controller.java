@@ -231,9 +231,9 @@ public class Controller {
         Order newOrder = new Order(nbrOfItemsInList, costCurrentOrder, newOrderName);
 
         //Adds all ordered items to Order history array in Order class
-        for (String currentOrder : currentOrderArray) {
-            if(currentOrder != null){
-                newOrder.addToArray(currentOrder);
+        for (String itemInCurrentOrderArray : currentOrderArray) {
+            if(itemInCurrentOrderArray != null){
+                newOrder.addToArray(itemInCurrentOrderArray);
             }
         }
 
