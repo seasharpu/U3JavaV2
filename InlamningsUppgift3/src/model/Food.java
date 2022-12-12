@@ -1,5 +1,8 @@
 package model;
 
+/** Abstract superclass for food items
+ * @author Alexander, Mehmet
+ */
 public abstract class Food extends Menu{
 
     private FoodType foodType;
@@ -9,7 +12,9 @@ public abstract class Food extends Menu{
         this.foodType = foodType;
     }
 
-    //@return
+    /** Returns instance variables of the current class and superclasses and a string
+     * @return return return super.toString() + ", Food: " + foodType;;
+     */
     @Override
     public String toString() {
         return super.toString() + ", Food: " + foodType;

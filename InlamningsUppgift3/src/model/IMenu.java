@@ -1,6 +1,11 @@
 package model;
 
+/** Contains the productOrigin method.
+ * @author Mehmet, Alexander
+ */
 public interface IMenu {
-    //This method gets the origion (country) of a product (where it was created)
+    /** Generates a string with information about product origin.
+     * @return String
+     */
     public String productOrigin();
 }

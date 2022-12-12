@@ -13,7 +13,11 @@ import model.Menu;
 import model.Order;
 import view.ButtonType;
 
+/** Mediator for view and model classes. Handles logic.
+ * @author Mehmet, Alexander
+ */
 public class Controller {
+
     private MainFrame view;
     
     private ButtonType currentLeftMenu = ButtonType.NoChoice; // for test purposes - delete if not used in final solution
@@ -41,7 +45,11 @@ public class Controller {
         view.disableViewSelectedOrderButton();
     }
 
-    //Prepares the arrays and creates pizzas and drinks 
+    /**
+     * //Prepares the arrays and creates pizzas and drinks
+     * @author Mehmet, Alexander
+     */
+
     private void loadStringTestValues() {
 
         currentOrderArray = new String[10];
@@ -60,7 +68,12 @@ public class Controller {
         menu.addAlcoholicDrink(36, "Carlsberg", DrinkType.Alcoholic, 5.0);
     }
 
-    //This method is called by class MinFrame when a button in teh GUI is pressed
+
+    /**This method is called by class MinFrame when a button in teh GUI is pressed
+     * @author Mehmet
+     * @param button - A type of button in enum.
+     */
+
     public void buttonPressed(ButtonType button){
 
         switch (button) {
@@ -77,7 +90,6 @@ public class Controller {
                 break;
 
             case MakePizza:
-                addNewFood();
                 break;
 
             case OrderHistory:
@@ -106,9 +118,12 @@ public class Controller {
         }
     }
 
-    //Adds chosen item to currentOrder array
+    /**Adds chosen item to currentOrder array
+     * @author Mehmet, Alexander
+     * @param selectionIndex - Index to be used for adding menu items to current order
+     */
+
     public void addItemToOrder(int selectionIndex) {
-        System.out.println("Index selection left panel: " + selectionIndex); //for test purposes  - remove when not needed
 
         if (selectionIndex != -1){ // if something is selected in the left menu list
             switch (currentLeftMenu) { //This might need to change depending on architecture
@@ -149,7 +164,11 @@ public class Controller {
 
     }
 
-    //Gets and show the a chosen order from orderhistory
+    /** Gets and show the chosen order from orderhistory
+     * @author Mehmet
+     * @param selectionIndex
+     */
+    //
     public void viewSelectedOrder(int selectionIndex){
         System.out.println("Index selection left panel: " + selectionIndex); //for test purposes  - remove when not needed
 
@@ -163,7 +182,10 @@ public class Controller {
         }
     }
 
-    //Sets foods to left panel
+    /**Sets foods to left panel
+     * @author Mehmet
+     */
+
     public void setToFoodMenu() {
         currentLeftMenu = ButtonType.Food;
     
@@ -176,7 +198,10 @@ public class Controller {
         view.disableViewSelectedOrderButton();
     }
 
-    //Sets drinks to left panel
+    /** Sets drinks to left panel
+     * @author Mehmet, Alexander
+     */
+
     public void setToDrinkMenu() {
         currentLeftMenu = ButtonType.Drinks;
         view.populateLeftPanel(menu.getDrinks());
@@ -187,7 +212,10 @@ public class Controller {
         view.disableViewSelectedOrderButton();
     }
 
-    //Sets early order to left panel
+    /** Sets early order to left panel
+     * @author Mehmet, Alexander
+     */
+
     public void setToOrderHistoryMenu() {
         currentLeftMenu = ButtonType.OrderHistory;
         view.clearRightPanel();
@@ -206,15 +234,11 @@ public class Controller {
         view.disableOrderButton();
     }
 
-    //Creates a custom pizza
-    public void addNewFood() {
-        //newPizzaType = new CustomPizzaFrame(this);        
 
-        //For grade VG: Add more code to save the new Pizza type and update menu,
-        view.enableAllButtons();
-    }
+    /** Adds order to orderList array, clears the currentOrderArray and resets the variables
+     * @author Mehmet
+     */
 
-    //Adds order to orderList array, clears the currentOrderArray and resets the variables
     public void placeOrder() {
         
         //Counts the amount orders in orderslist to generate a name for newOrder
@@ -265,7 +289,10 @@ public class Controller {
         view.disableViewSelectedOrderButton();
     }
 
-    //Increases the length of ordersList array
+    /** Increases the length of ordersList array
+     * @author Mehmet
+     */
+    //
     public void increaseOrdersList(){
         Order[] tempOrdersList = new Order[ordersList.length + 10];
 
@@ -278,7 +305,10 @@ public class Controller {
         ordersList = tempOrdersList;
     }
 
-    //This method increase the length of the currentOrderArray while it is almost full
+    /** This method increase the length of the currentOrderArray while it is almost full
+     * @author Mehmet, Alexander
+     */
+
     public void increaseCurrentOrderArrayLength(){
         String[] tempCurrentOrderArray = new String[currentOrderArray.length + 10];
 

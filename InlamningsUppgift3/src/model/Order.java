@@ -11,22 +11,31 @@ public class Order {
         this.orderName = ordername;
     }
 
-    //@return
+    /** Returns a String array that contains all order items
+     * @return orderItems
+     */
     public String[] getOrderHistory() {
         return orderItems;
     }
 
-    //@return
+    /** Returns the cost of an order
+     * @return orderCost
+     */
     public Double getOrderCost() {
         return orderCost;
     }
 
-    //@return
+    /** Returns the name of an order.
+     * @return orderName
+     */
     public String getOrderName(){
         return orderName;
     }
 
-    //Adds item to the orderItems string array
+    /** Adds a string version of product object into an array for one order.
+     * @param item - String version of product object
+     * @author Mehmet
+     */
     public void addToArray(String item) {
         for (int i = 0; i<orderItems.length; i++){
             if(orderItems[i] == null){
