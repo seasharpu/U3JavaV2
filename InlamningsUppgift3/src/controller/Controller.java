@@ -278,24 +278,6 @@ public class Controller {
         ordersList = tempOrdersList;
     }
 
-    /* 
-    //Increases the length of name and cost arrays
-    public void increaseArraysNameAndCost(){
-        String[] tempOrdersName = new String[ordersName.length + 10];
-        Double[] tempOrdersCost = new Double[ordersCost.length + 10];
-
-        for (int i = 0; i<ordersName.length; i++){
-            if(tempOrdersName[i] == null){
-                tempOrdersName[i] = ordersName[i];
-                tempOrdersCost[i] = ordersCost[i];
-            }
-        }
-
-        ordersName = tempOrdersName;
-        ordersCost = tempOrdersCost;
-    }
-*/
-
     //This method increase the length of the currentOrderArray while it is almost full
     public void increaseCurrentOrderArrayLength(){
         String[] tempCurrentOrderArray = new String[currentOrderArray.length + 10];

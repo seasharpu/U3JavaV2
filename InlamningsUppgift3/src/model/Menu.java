@@ -30,6 +30,7 @@ public class Menu implements IMenu{
         return productCost;
     }
    
+    //Adds pizza object to food array
     public void addPizza(int costOfPizza, String pizzaName, FoodType foodType, Ingredients ingredient1, Ingredients ingredient2){
         for (int i = 0; i < foods.length; i++) {
             if(foods[i] == null){
@@ -38,7 +39,8 @@ public class Menu implements IMenu{
             }
         }
     }
-
+    
+    //Adds drink object to drinks array
     public void addDrink(int cost, String drinkName, DrinkType drinkType){
         for (int i = 0; i < drinks.length; i++) {
             if(drinks[i] == null){

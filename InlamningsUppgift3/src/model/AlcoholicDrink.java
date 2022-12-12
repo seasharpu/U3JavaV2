@@ -14,10 +14,6 @@ public class AlcoholicDrink extends Drink{
         return alcoholPercent;
     }
 
-    public void setAlcoholPercent(double alcoholPercent) {
-        this.alcoholPercent = alcoholPercent;
-    }
-
     //@return
    @Override
    public String toString() {

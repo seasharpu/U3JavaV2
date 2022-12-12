@@ -26,6 +26,7 @@ public class Order {
         return orderName;
     }
 
+    //Adds item to the orderItems string array
     public void addToArray(String item) {
         for (int i = 0; i<orderItems.length; i++){
             if(orderItems[i] == null){
